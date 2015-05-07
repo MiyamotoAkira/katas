@@ -1,6 +1,9 @@
 package codekatas
 
-import "strconv"
+import (
+	   "strconv"
+	   "strings"
+	   )
 
 func FizzBuzzSingle(number int) string {
 	 switch {
@@ -11,5 +14,15 @@ func FizzBuzzSingle(number int) string {
 		case number%5 == 0:
 			 return "Buzz"
 	 }
+	 
 	 return strconv.Itoa(number)
+}
+
+func FizzBuzz(number int) string {
+	 temp := []string{}
+	 for counter := 1; counter <= number; counter ++ {
+	 	 temp = append(temp, FizzBuzzSingle(counter))
+	 }
+
+	 return strings.Join(temp, " " ) 
 }

@@ -29,3 +29,11 @@ func TestSingleDigitOutput(t *testing.T) {
 		 }
 	 }
 }
+
+func TestAllDigitsOutput( t *testing.T) {
+	 result := codekatas.FizzBuzz(20)
+	 expected := "1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz"
+	 if result != expected {
+	 	t.Error("The output of", 20, "was expected as", expected, "but was", result, )
+	}
+}
