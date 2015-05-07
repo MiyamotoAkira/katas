@@ -29,7 +29,8 @@ type testromans struct {
 	 expected string
 }
 
-var testOnes = []testnumbers {
+var testOnes = []testromans {
+	{0,""},
 	{1,"I"},
 	{2,"II"},
 	{3,"III"},
@@ -44,6 +45,83 @@ var testOnes = []testnumbers {
 func TestOnesOutput (t *testing.T) {
 	 for _, pair := range testOnes {
 	 	 result := codekatas.ConvertOnesToNumerals(pair.number)
+		 if result != pair.expected {
+		 	t.Error("For number", pair.number, "we expect", pair.expected, "but", result, "was calculated",)
+		 }
+	 }
+}
+
+
+var testTens = []testromans {
+	{0,""},
+	{1,"X"},
+	{2,"XX"},
+	{3,"XXX"},
+	{4,"XL"},
+	{5,"L"},
+	{6,"LX"},
+	{7,"LXX"},
+	{8,"LXXX"},
+	{9,"XC"},
+}
+
+func TestTensOutput (t *testing.T) {
+	 for _, pair := range testTens {
+	 	 result := codekatas.ConvertTensToNumerals(pair.number)
+		 if result != pair.expected {
+		 	t.Error("For number", pair.number, "we expect", pair.expected, "but", result, "was calculated",)
+		 }
+	 }
+}
+
+var testHundreds = []testromans {
+	{0,""},
+	{1,"C"},
+	{2,"CC"},
+	{3,"CCC"},
+	{4,"CD"},
+	{5,"D"},
+	{6,"DC"},
+	{7,"DCC"},
+	{8,"DCCC"},
+	{9,"CM"},
+}	
+
+func TestHundredsOutput (t *testing.T) {
+	 for _, pair := range testHundreds {
+	 	 result := codekatas.ConvertHundredsToNumerals(pair.number)
+		 if result != pair.expected {
+		 	t.Error("For number", pair.number, "we expect", pair.expected, "but", result, "was calculated",)
+		 }
+	 }
+}
+
+var testThousands = []testromans {
+	{0,""},
+	{1,"M"},
+	{2,"MM"},
+	{3,"MMM"},
+}	
+
+func TestThousandsOutput (t *testing.T) {
+	 for _, pair := range testThousands {
+	 	 result := codekatas.ConvertThousandsToNumerals(pair.number)
+		 if result != pair.expected {
+		 	t.Error("For number", pair.number, "we expect", pair.expected, "but", result, "was calculated",)
+		 }
+	 }
+}
+
+var testNumbers = []testromans {
+	{1985,"MCMLXXXV"},
+	{47, "XLVII"},
+	{2012, "MMXII"},
+	{379, "CCCLXXIX"},
+}
+
+func TestRomans (t *testing.T) {
+	 for _, pair := range testNumbers {
+	 	 result := codekatas.ConvertToRomans(pair.number)
 		 if result != pair.expected {
 		 	t.Error("For number", pair.number, "we expect", pair.expected, "but", result, "was calculated",)
 		 }
