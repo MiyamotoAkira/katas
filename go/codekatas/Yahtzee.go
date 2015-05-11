@@ -8,6 +8,10 @@ const(
 	FOURS
 	FIVES
 	SIXES
+	PAIR
+	TWOPAIR
+	THREEKIND
+	FOURKIND
 	SMALL
 	LARGE
 	FULL
@@ -21,6 +25,10 @@ var plays = [...]string {
 	"FOURS",
 	"FIVES",
 	"SIXES",
+	"PAIR",
+	"TWOPAIR",
+	"THREEKIND",
+	"FOURKIND",
 	"SMALL",
 	"LARGE",
 	"FULL",
@@ -32,5 +40,28 @@ func (play PlayCall) String() string {
 }
 
 func CalculateRoll(dice []int, play PlayCall) int {
-	 return 0;
+	 var valuetocheck int
+	 switch play {
+	 	case ONES:
+			 valuetocheck = 1
+		case TWOS:
+			 valuetocheck = 2
+		case THREES:
+			 valuetocheck = 3
+		case FOURS:
+			 valuetocheck = 4
+		case FIVES:
+			 valuetocheck = 5
+		case SIXES:
+			 valuetocheck = 6
+	 }
+	 
+	 total := 0
+	 for _, value := range dice {
+	 	 if value == valuetocheck {
+		 	total += value
+		 }
+	 }
+	 
+	 return total;
 }
