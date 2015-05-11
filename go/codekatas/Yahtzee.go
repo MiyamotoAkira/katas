@@ -40,6 +40,15 @@ func (play PlayCall) String() string {
 }
 
 func CalculateRoll(dice []int, play PlayCall) int {
+	 switch play {
+	 	case ONES, TWOS, THREES, FOURS, FIVES, SIXES:
+			 return Numbers(dice, play)
+	 }
+
+	 return 0
+}
+
+func Numbers(dice []int, play PlayCall) int {
 	 var valuetocheck int
 	 switch play {
 	 	case ONES:
