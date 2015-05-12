@@ -20,47 +20,47 @@ The following categories exists:
 package katatests
 
 import (
-	   "testing"
-	   "github.com/miyamotoakira/katas/go/codekatas"
-	   )
+	"github.com/miyamotoakira/katas/go/codekatas"
+	"testing"
+)
 
 type yahtzeeCheck struct {
-	 dice []int
-	 play codekatas.PlayCall
-	 expected int
+	dice     []int
+	play     codekatas.PlayCall
+	expected int
 }
 
-var yahtzeePlays = []yahtzeeCheck {
-	{[]int {1,1,2,3,4},codekatas.ONES,2},
-	{[]int {2,5,2,2,1},codekatas.TWOS,6},
-	{[]int {2,5,2,3,1},codekatas.THREES,3},
-	{[]int {2,4,2,2,4},codekatas.FOURS,8},
-	{[]int {2,5,5,5,5},codekatas.FIVES,20},
-	{[]int {2,5,2,6,1},codekatas.SIXES,6},
-	{[]int {2,3,2,1,5},codekatas.PAIR,4},
-	{[]int {2,3,4,1,5},codekatas.PAIR,0},
-	{[]int {2,3,2,5,5},codekatas.PAIR,10},
-	{[]int {2,3,2,1,2},codekatas.THREEKIND,6},
-	{[]int {2,3,4,2,5},codekatas.THREEKIND,0},
-	{[]int {2,3,2,1,2},codekatas.FOURKIND,0},
-	{[]int {2,2,4,2,2},codekatas.FOURKIND,8},
-	{[]int {2,2,4,2,2},codekatas.YAHTZEE,0},
-	{[]int {2,2,2,2,2},codekatas.YAHTZEE,50},
-	{[]int {2,2,4,4,2},codekatas.TWOPAIR,12},
-	{[]int {2,2,2,2,2},codekatas.TWOPAIR,0},
-	{[]int {2,2,4,4,2},codekatas.FULL,14},
-	{[]int {2,2,2,2,2},codekatas.FULL,0},	
-	{[]int {1,2,3,4,5},codekatas.SMALL,15},
-	{[]int {2,3,4,5,6},codekatas.SMALL,0},	
-	{[]int {1,2,3,4,5},codekatas.LARGE,0},
-	{[]int {2,3,4,5,6},codekatas.LARGE,20},	
+var yahtzeePlays = []yahtzeeCheck{
+	{[]int{1, 1, 2, 3, 4}, codekatas.ONES, 2},
+	{[]int{2, 5, 2, 2, 1}, codekatas.TWOS, 6},
+	{[]int{2, 5, 2, 3, 1}, codekatas.THREES, 3},
+	{[]int{2, 4, 2, 2, 4}, codekatas.FOURS, 8},
+	{[]int{2, 5, 5, 5, 5}, codekatas.FIVES, 20},
+	{[]int{2, 5, 2, 6, 1}, codekatas.SIXES, 6},
+	{[]int{2, 3, 2, 1, 5}, codekatas.PAIR, 4},
+	{[]int{2, 3, 4, 1, 5}, codekatas.PAIR, 0},
+	{[]int{2, 3, 2, 5, 5}, codekatas.PAIR, 10},
+	{[]int{2, 3, 2, 1, 2}, codekatas.THREEKIND, 6},
+	{[]int{2, 3, 4, 2, 5}, codekatas.THREEKIND, 0},
+	{[]int{2, 3, 2, 1, 2}, codekatas.FOURKIND, 0},
+	{[]int{2, 2, 4, 2, 2}, codekatas.FOURKIND, 8},
+	{[]int{2, 2, 4, 2, 2}, codekatas.YAHTZEE, 0},
+	{[]int{2, 2, 2, 2, 2}, codekatas.YAHTZEE, 50},
+	{[]int{2, 2, 4, 4, 2}, codekatas.TWOPAIR, 12},
+	{[]int{2, 2, 2, 2, 2}, codekatas.TWOPAIR, 0},
+	{[]int{2, 2, 4, 4, 2}, codekatas.FULL, 14},
+	{[]int{2, 2, 2, 2, 2}, codekatas.FULL, 0},
+	{[]int{1, 2, 3, 4, 5}, codekatas.SMALL, 15},
+	{[]int{2, 3, 4, 5, 6}, codekatas.SMALL, 0},
+	{[]int{1, 2, 3, 4, 5}, codekatas.LARGE, 0},
+	{[]int{2, 3, 4, 5, 6}, codekatas.LARGE, 20},
 }
 
-func TestRolls (t *testing.T) {
-	 for _,roll := range yahtzeePlays {
-	 	 result := codekatas.CalculateRoll(roll.dice, roll.play)
-		 if result != roll.expected {
-		 	t.Error("For values", roll.dice, "and play", roll.play, "we expect", roll.expected, "but we got", result,)
-			}
-	 }	 
+func TestRolls(t *testing.T) {
+	for _, roll := range yahtzeePlays {
+		result := codekatas.CalculateRoll(roll.dice, roll.play)
+		if result != roll.expected {
+			t.Error("For values", roll.dice, "and play", roll.play, "we expect", roll.expected, "but we got", result)
+		}
+	}
 }
