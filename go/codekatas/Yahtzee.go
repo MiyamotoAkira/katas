@@ -45,6 +45,23 @@ func CalculateRoll(dice []int, play PlayCall) int {
 			 return Numbers(dice, play)
 		case PAIR:
 			 return Pair(dice)
+		case THREEKIND:
+			 return Three(dice)
+	 }
+
+	 return 0
+}
+
+func Three(dice []int) int {
+	 var values  = []int {0,0,0,0,0,0}
+	 for _, die := range dice {
+	 	 values[die -1] += 1
+	 }
+
+	 for die := 6; die > 0; die-- {
+	 	 if values[die -1] > 2 {
+		 	return die * 3
+		 }
 	 }
 
 	 return 0
