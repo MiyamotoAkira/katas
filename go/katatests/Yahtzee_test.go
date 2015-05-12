@@ -50,6 +50,8 @@ var yahtzeePlays = []yahtzeeCheck {
 	{[]int {2,2,2,2,2},codekatas.TWOPAIR,0},
 	{[]int {2,2,4,4,2},codekatas.FULL,14},
 	{[]int {2,2,2,2,2},codekatas.FULL,0},	
+	{[]int {1,2,3,4,5},codekatas.SMALL,15},
+	{[]int {2,3,4,5,6},codekatas.SMALL,0},	
 }
 
 func TestRolls (t *testing.T) {

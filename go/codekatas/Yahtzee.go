@@ -55,7 +55,22 @@ func CalculateRoll(dice []int, play PlayCall) int {
 			 return TwoPair(dice)
 		case FULL:
 			 return Full(dice)
+		case SMALL:
+			 return Small(dice)
 	 }
+
+	 return 0
+}
+
+func Small(dice []int) int {
+	 var values  = []int {0,0,0,0,0,0}
+	 for _, die := range dice {
+	 	 values[die -1] += 1
+	 }
+
+	 if values[0] == 1 && values[1] == 1 && values[2] == 1 && values[3] == 1 && values[4] == 1 {
+	 	return 15
+		}
 
 	 return 0
 }
