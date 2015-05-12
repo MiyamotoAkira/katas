@@ -43,6 +43,23 @@ func CalculateRoll(dice []int, play PlayCall) int {
 	 switch play {
 	 	case ONES, TWOS, THREES, FOURS, FIVES, SIXES:
 			 return Numbers(dice, play)
+		case PAIR:
+			 return Pair(dice)
+	 }
+
+	 return 0
+}
+
+func Pair(dice []int) int {
+	 var values  = []int {0,0,0,0,0,0}
+	 for _, die := range dice {
+	 	 values[die -1] += 1
+	 }
+
+	 for die := 6; die > 0; die-- {
+	 	 if values[die -1] > 1 {
+		 	return die * 2
+		 }
 	 }
 
 	 return 0
