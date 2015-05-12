@@ -53,6 +53,32 @@ func CalculateRoll(dice []int, play PlayCall) int {
 			 return Yahtzee(dice)
 		case TWOPAIR:
 			 return TwoPair(dice)
+		case FULL:
+			 return Full(dice)
+	 }
+
+	 return 0
+}
+
+func Full(dice []int) int {
+	 var values  = []int {0,0,0,0,0,0}
+	 for _, die := range dice {
+	 	 values[die -1] += 1
+	 }
+
+	 three := 0
+	 two := 0
+	 for die, counter := range values {
+	 	 if counter == 2 {
+		 	two = die + 1
+		 }
+		 if counter == 3 {
+		 	three = die + 1
+		 }
+	 }
+
+	 if three != 0 && two != 0 {
+	 	return (three * 3) + (two * 2)
 	 }
 
 	 return 0
