@@ -53,29 +53,22 @@ func CalculateRoll(dice []int, play PlayCall) int {
 }
 
 func Three(dice []int) int {
-	 var values  = []int {0,0,0,0,0,0}
-	 for _, die := range dice {
-	 	 values[die -1] += 1
-	 }
-
-	 for die := 6; die > 0; die-- {
-	 	 if values[die -1] > 2 {
-		 	return die * 3
-		 }
-	 }
-
-	 return 0
+	 return MultipleMatches(dice, 3)
 }
 
 func Pair(dice []int) int {
+	 return MultipleMatches(dice, 2)
+}
+
+func MultipleMatches(dice []int, kind int) int {
 	 var values  = []int {0,0,0,0,0,0}
 	 for _, die := range dice {
 	 	 values[die -1] += 1
 	 }
 
 	 for die := 6; die > 0; die-- {
-	 	 if values[die -1] > 1 {
-		 	return die * 2
+	 	 if values[die -1] > (kind -1) {
+		 	return die * kind
 		 }
 	 }
 
