@@ -47,9 +47,15 @@ func CalculateRoll(dice []int, play PlayCall) int {
 			 return Pair(dice)
 		case THREEKIND:
 			 return Three(dice)
+		case FOURKIND:
+			 return Four(dice)
 	 }
 
 	 return 0
+}
+
+func Four(dice []int) int {
+	 return MultipleMatches(dice, 4)
 }
 
 func Three(dice []int) int {
