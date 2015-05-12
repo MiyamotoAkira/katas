@@ -65,12 +65,7 @@ func CalculateRoll(dice []int, play PlayCall) int {
 }
 
 func Small(dice []int) int {
-	var values  = []int {0,0,0,0,0,0}
-	for _, die := range dice {
-		 values[die -1] += 1
-	}
-
-	if values[0] == 1 && values[1] == 1 && values[2] == 1 && values[3] == 1 && values[4] == 1 {
+	if calculateStraight(dice, 0) {
 	   	return 15
 	}
 
@@ -78,16 +73,24 @@ func Small(dice []int) int {
 }
 
 func Large(dice []int) int {
+	 if calculateStraight(dice, 1) {
+	 	return 20
+	}
+
+	 return 0
+}
+
+func calculateStraight (dice []int, initial int) bool {
 	 var values  = []int {0,0,0,0,0,0}
 	 for _, die := range dice {
 	 	 values[die -1] += 1
 	 }
 
-	 if values[1] == 1 && values[2] == 1 && values[3] == 1 && values[4] == 1 && values[5] ==1 {
-	 	return 20
+	 if values[initial] == 1 && values[initial+1] == 1 && values[initial+2] == 1 && values[initial+3] == 1 && values[initial+4] ==1 {
+	 	return true
 	}
 
-	 return 0
+	 return false
 }
 
 func Full(dice []int) int {
