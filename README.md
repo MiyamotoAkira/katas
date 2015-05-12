@@ -9,8 +9,9 @@ The following languages and katas are present
   * FizzBuzz
   * Roman Numerals
   * Tennis
-  * Yathzee
+  * Yahtzee
   * Bowling
 * Go
   * FizzBuzz
   * Roman Numerals
+  * Yahtzee
