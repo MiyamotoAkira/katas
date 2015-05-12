@@ -49,9 +49,45 @@ func CalculateRoll(dice []int, play PlayCall) int {
 			 return Three(dice)
 		case FOURKIND:
 			 return Four(dice)
+		case YAHTZEE:
+			 return Yahtzee(dice)
+		case TWOPAIR:
+			 return TwoPair(dice)
 	 }
 
 	 return 0
+}
+
+func TwoPair(dice []int) int {
+	 var values  = []int {0,0,0,0,0,0}
+	 for _, die := range dice {
+	 	 values[die -1] += 1
+	 }
+
+	 var pairsfound = 0
+	 var pairs = []int {0,0}
+	 for die := 6; die > 0 && pairsfound < 2; die-- {
+	 	 if values[die -1] > (1) {
+		 	pairs[pairsfound] = die
+			pairsfound++
+		 }
+	 }
+
+	 if pairsfound == 2 {
+	 	return (pairs[0] * 2) + (pairs[1] *2)
+	 }
+	 
+	 return 0
+}
+
+func Yahtzee(dice []int) int {
+	for index, die := range dice {
+	 	if index > 0 && die != dice[index -1] {
+		   return 0
+		}
+	}
+
+	return 50
 }
 
 func Four(dice []int) int {
