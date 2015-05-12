@@ -80,11 +80,17 @@ func Large(dice []int) int {
 	 return 0
 }
 
-func calculateStraight (dice []int, initial int) bool {
+func ExtractDice(dice []int) []int {
 	 var values  = []int {0,0,0,0,0,0}
 	 for _, die := range dice {
 	 	 values[die -1] += 1
 	 }
+
+	 return values
+}
+
+func calculateStraight (dice []int, initial int) bool {
+	 values := ExtractDice(dice)
 
 	 if values[initial] == 1 && values[initial+1] == 1 && values[initial+2] == 1 && values[initial+3] == 1 && values[initial+4] ==1 {
 	 	return true
@@ -94,10 +100,7 @@ func calculateStraight (dice []int, initial int) bool {
 }
 
 func Full(dice []int) int {
-	 var values  = []int {0,0,0,0,0,0}
-	 for _, die := range dice {
-	 	 values[die -1] += 1
-	 }
+	 values := ExtractDice(dice)
 
 	 three := 0
 	 two := 0
@@ -118,10 +121,7 @@ func Full(dice []int) int {
 }
 
 func TwoPair(dice []int) int {
-	 var values  = []int {0,0,0,0,0,0}
-	 for _, die := range dice {
-	 	 values[die -1] += 1
-	 }
+	 values := ExtractDice(dice)
 
 	 var pairsfound = 0
 	 var pairs = []int {0,0}
@@ -162,10 +162,7 @@ func Pair(dice []int) int {
 }
 
 func MultipleMatches(dice []int, kind int) int {
-	 var values  = []int {0,0,0,0,0,0}
-	 for _, die := range dice {
-	 	 values[die -1] += 1
-	 }
+	 values := ExtractDice(dice)
 
 	 for die := 6; die > 0; die-- {
 	 	 if values[die -1] > (kind -1) {
