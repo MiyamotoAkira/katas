@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "katasAlgorithms", "katasAlgorithms\katasAlgorithms.csproj", "{D878E8C9-DDAC-4322-A721-3CC1029F4367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KatasTests", "KatasTests\KatasTests.csproj", "{71B89E44-FAD2-46B4-A4D3-97102C950AF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71B89E44-FAD2-46B4-A4D3-97102C950AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B89E44-FAD2-46B4-A4D3-97102C950AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B89E44-FAD2-46B4-A4D3-97102C950AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B89E44-FAD2-46B4-A4D3-97102C950AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D878E8C9-DDAC-4322-A721-3CC1029F4367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D878E8C9-DDAC-4322-A721-3CC1029F4367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D878E8C9-DDAC-4322-A721-3CC1029F4367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D878E8C9-DDAC-4322-A721-3CC1029F4367}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 120
+		$1.TabWidth = 18
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.StatementBraceStyle = NextLine
+		$2.BeforeMethodDeclarationParentheses = False
+		$2.BeforeMethodCallParentheses = False
+		$2.AfterDelegateDeclarationParameterComma = True
+		$2.NewParentheses = False
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
