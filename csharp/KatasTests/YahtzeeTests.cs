@@ -38,7 +38,7 @@ namespace KatasTests
 
         public IEnumerable<TestCase> SetTestCases()
         {
-            List<TestCase> testCases = new List<TestCase>();
+            List<TestCase> testCases = new List<TestCase>();            
             testCases.Add(new TestCase(new List<int>{ 1, 3, 2, 2, 5 }, Options.ONES, 1));
             testCases.Add(new TestCase(new List<int>{ 1, 3, 2, 2, 5 }, Options.TWOS, 4));
             testCases.Add(new TestCase(new List<int>{ 3, 3, 3, 3, 5 }, Options.THREES, 12));
@@ -46,6 +46,11 @@ namespace KatasTests
             testCases.Add(new TestCase(new List<int>{ 4, 3, 4, 3, 5 }, Options.FIVES, 5));
             testCases.Add(new TestCase(new List<int>{ 4, 3, 4, 3, 5 }, Options.SIXES, 0));
             testCases.Add(new TestCase(new List<int>{ 6, 6, 6, 3, 5 }, Options.SIXES, 18));
+            testCases.Add(new TestCase(new List<int>{ 2, 3, 2, 2, 5 }, Options.PAIR, 4));
+            testCases.Add(new TestCase(new List<int>{ 2, 3, 2, 2, 5 }, Options.THREEKIND, 6));
+            testCases.Add(new TestCase(new List<int>{ 2, 3, 2, 2, 2 }, Options.FOURKIND, 8));
+            testCases.Add(new TestCase(new List<int>{ 1, 3, 2, 2, 2 }, Options.FOURKIND, 0));
+            testCases.Add(new TestCase(new List<int>{ 2, 3, 4, 1, 5 }, Options.FOURKIND, 0));
             return testCases;
         }
     }

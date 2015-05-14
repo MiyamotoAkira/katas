@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace katasAlgorithms
 {
@@ -33,6 +34,25 @@ namespace katasAlgorithms
             case Options.FIVES:
             case Options.SIXES:
                 return CalculateSimpleNumbers(dice, (int)option);
+            case Options.PAIR:
+                return CalculateKind(dice, 2);
+            case Options.THREEKIND:
+                return CalculateKind(dice, 3);
+            case Options.FOURKIND:
+                return CalculateKind(dice, 4);
+            }
+
+            return 0;
+        }
+
+        public int CalculateKind(IEnumerable<int>dice, int size)
+        {
+            var consolidated = ConsolidateDice(dice);
+            var ordered = consolidated.Where(x => x.Value >= size).OrderByDescending(x => x.Key);
+            if (ordered.Any())
+            {
+                var biggerNumber = ordered.First();
+                return biggerNumber.Key * size;
             }
 
             return 0;
