@@ -18,12 +18,13 @@ namespace katasAlgorithms
         FOURKIND,
         SMALL,
         LARGE,
+        FULL,
         YAHTZEE
     }
 
     public class Yahtzee
     {
-        public int CalculateRoll (IEnumerable<int> dice, Options option)
+        public int CalculateRoll(IEnumerable<int> dice, Options option)
         {
             switch (option)
             {
@@ -40,6 +41,85 @@ namespace katasAlgorithms
                 return CalculateKind(dice, 3);
             case Options.FOURKIND:
                 return CalculateKind(dice, 4);
+            case Options.TWOPAIR:
+                return CalculateDoubleKind(dice);
+            case Options.FULL:
+                return CalculateFullKind(dice);
+            case Options.SMALL:
+                return CalculateSmallStraight(dice);
+            case Options.LARGE:
+                return CalculateLargeStraight(dice);
+            case Options.YAHTZEE:
+                return CalculateYahtzee(dice);
+            }
+
+            return 0;
+        }
+
+        public int CalculateYahtzee(IEnumerable<int> dice)
+        {
+            var consolidated = ConsolidateDice(dice);
+            if (consolidated.Count == 1)
+            {
+                return 50;
+            }
+
+            return 0;
+        }
+
+        public int CalculateSmallStraight(IEnumerable<int> dice)
+        {
+            if (CalculateStraight(dice, 0))
+            {
+                return 15;
+            }
+
+            return 0;
+        }
+
+        public int CalculateLargeStraight(IEnumerable<int> dice)
+        {
+            if (CalculateStraight(dice, 1))
+            {
+                return 20;
+            }
+
+            return 0;
+        }
+
+        public bool CalculateStraight(IEnumerable<int> dice, int modifier)
+        {
+            var consolidated = ConsolidateDice(dice);
+            var ordered = consolidated.OrderBy(x => x.Key);
+            if (ordered.Count() == 5 && ordered.First().Key == (1 + modifier) && ordered.Last().Key == (5 + modifier))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public int CalculateFullKind(IEnumerable<int> dice)
+        {
+            var consolidated = ConsolidateDice(dice);
+            var triple = consolidated.FirstOrDefault(x => x.Value == 3);
+            var pair = consolidated.FirstOrDefault(x => x.Value == 2);
+            if (pair.Key > 0 && triple.Key > 0)
+            {
+                return triple.Key * 3 + pair.Key * 2;
+            }
+
+            return 0;
+        }
+
+        public int CalculateDoubleKind(IEnumerable<int> dice)
+        {
+            var consolidated = ConsolidateDice(dice);
+            var ordered = consolidated.Where(x => x.Value >= 2).OrderByDescending(x => x.Key);
+
+            if (ordered.Count() > 1)
+            {
+                return (ordered.First().Key * 2) + (ordered.Skip(1).First().Key * 2);
             }
 
             return 0;
@@ -63,7 +143,7 @@ namespace katasAlgorithms
             var consolidated = ConsolidateDice(dice);
             if (consolidated.ContainsKey(die))
             {
-                return die * consolidated [die];
+                return die * consolidated[die];
             }
 
             return 0;
@@ -80,7 +160,7 @@ namespace katasAlgorithms
                     consolidated.Add(die, 0);
                 }
 
-                consolidated [die] += 1;
+                consolidated[die] += 1;
             }
 
             return consolidated;
