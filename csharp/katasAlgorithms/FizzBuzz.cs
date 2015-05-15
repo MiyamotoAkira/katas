@@ -5,19 +5,29 @@ namespace katasAlgorithms
 {
     public class FizzBuzz
     {
+        public bool DivisibleBy5(int number)
+        {
+            return number % 5 == 0;
+        }
+
+        public bool DivisibleBy3(int number)
+        {
+            return number % 3 == 0;
+        }
+
         public string ConvertSingle(int number)
         {
-            if (number % 3 == 0 && number % 5 == 0)
+            if (DivisibleBy3(number) && DivisibleBy5(number))
             {
                 return "FizzBuzz";
             }
 
-            if (number % 3 == 0)
+            if (DivisibleBy3(number))
             {
                 return "Fizz";
             }
 
-            if (number % 5 == 0)
+            if (DivisibleBy5(number))
             {
                 return "Buzz";
             }
