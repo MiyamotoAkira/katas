@@ -15,3 +15,7 @@ The following languages and katas are present
   * FizzBuzz
   * Roman Numerals
   * Yahtzee
+
+* C#
+  * FizzBuzz
+  * Yahtzee
