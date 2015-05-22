@@ -4,6 +4,9 @@ def convert_ones(number):
 def convert_tens(number):
     return convert_digit_to_roman(number, "X", "L", "C")
 
+def convert_hundreds(number):
+    return convert_digit_to_roman(number, "C", "D", "M")
+
 def convert_digit_to_roman(number, unit, half, over):
     if number == 1:
         return unit

@@ -33,3 +33,19 @@ class RomanTests(unittest.TestCase):
     def test_tens(self, number, expected):
         result = romans.convert_tens(number)
         self.assertEqual(result, expected)
+
+
+    @parameterized.expand([
+        (1, "C"),
+        (2, "CC"),
+        (3, "CCC"),
+        (4, "CD"),
+        (5, "D"),
+        (6, "DC"),
+        (7, "DCC"),
+        (8, "DCCC"),
+        (9, "CM")
+        ])
+    def test_hundreds(self, number, expected):
+        result = romans.convert_hundreds(number)
+        self.assertEqual(result, expected)
