@@ -1,44 +1,27 @@
 def convert_ones(number):
-    if number == 1:
-        return "I"
-    elif number == 2:
-        return "II"
-    elif number == 3:
-        return "III"
-    elif number == 4:
-        return "IV"
-    elif number == 5:
-        return "V"
-    elif number == 6:
-        return "VI"
-    elif number == 7:
-        return "VII"
-    elif number == 8:
-        return "VIII"
-    elif number == 9:
-        return "IX"
-    
-    return "NonNo"
-
+    return convert_digit_to_roman(number, "I", "V", "X")
 
 def convert_tens(number):
+    return convert_digit_to_roman(number, "X", "L", "C")
+
+def convert_digit_to_roman(number, unit, half, over):
     if number == 1:
-        return "X"
+        return unit
     elif number == 2:
-        return "XX"
+        return unit + unit
     elif number == 3:
-        return "XXX"
+        return unit + unit + unit
     elif number == 4:
-        return "XL"
+        return unit + half
     elif number == 5:
-        return "L"
+        return half
     elif number == 6:
-        return "LX"
+        return half + unit
     elif number == 7:
-        return "LXX"
+        return half + unit + unit
     elif number == 8:
-        return "LXXX"
+        return half + unit + unit + unit
     elif number == 9:
-        return "XC"
+        return unit + over
 
     return "NoNo"
