@@ -49,3 +49,13 @@ class RomanTests(unittest.TestCase):
     def test_hundreds(self, number, expected):
         result = romans.convert_hundreds(number)
         self.assertEqual(result, expected)
+
+
+    @parameterized.expand([
+        (1, "M"),
+        (2, "MM"),
+        (3, "MMM"),
+        ])
+    def test_thousands(self, number, expected):
+        result = romans.convert_thousands(number)
+        self.assertEqual(result, expected)

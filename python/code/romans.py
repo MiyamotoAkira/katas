@@ -7,6 +7,9 @@ def convert_tens(number):
 def convert_hundreds(number):
     return convert_digit_to_roman(number, "C", "D", "M")
 
+def convert_thousands(number):
+    return convert_digit_to_roman(number, "M", "What?", "I Shouldn't Be Here")
+
 def convert_digit_to_roman(number, unit, half, over):
     if number == 1:
         return unit
