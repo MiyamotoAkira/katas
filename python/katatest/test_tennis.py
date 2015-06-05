@@ -31,17 +31,32 @@ class TestTennis(unittest.TestCase):
         (6, 4, True),
         (2, 6, True),
         (6, 5, False),
-        (8, 10, True)
+        (8, 10, True),
+        (5, 3, True)
     ])
     def test_calculate_if_game_is_finished(self, player1_score, player2_score, expected):
         game = tennis.Game(player1_score, player2_score)
         self.assertEqual(game.is_game_finished(), expected)
 
     @parameterized.expand([
-        (6, 4, "player 1"),
-        (4, 6, "player 2"),
-        (4, 5, "still in play")
+        (6, 4, 1),
+        (4, 6, 2),
+        (4, 5, 0)
         ])
     def test_who_won(self, player1_score, player2_score, result):
         game = tennis.Game(player1_score, player2_score)
         self.assertEqual(game.who_won(), result)
+
+    @parameterized.expand([
+        (0, 0, "All Love"),
+        (1, 0, "Fifteen - Love"),
+        (2, 3, "Thirty - Forty"),
+        (3, 3, "Deuce"),
+        (4, 3, "Advantage Player 1"),
+        (5, 6, "Advantage Player 2"),
+        (5, 3, "Game Finished. Player 1 won"),
+        (6, 8, "Game Finished. Player 2 won")
+        ])
+    def test_get_current_result(self, player1_score, player2_score, expected):
+        game = tennis.Game(player1_score, player2_score)
+        self.assertEqual(game.get_current_result(), expected)
