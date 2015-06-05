@@ -11,6 +11,7 @@ The following languages and katas are present
   * Tennis
   * Yahtzee
   * Bowling
+  
 * Go
   * FizzBuzz
   * Roman Numerals
@@ -19,3 +20,7 @@ The following languages and katas are present
 * C#
   * FizzBuzz
   * Yahtzee
+
+* Python
+  * FizzBuzz
+  * Roman Numerals
