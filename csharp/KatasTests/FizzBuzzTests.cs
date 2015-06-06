@@ -9,7 +9,7 @@ namespace KatasTests
     [Category("Unit")]
     public class FizzBuzzTests
     {
-        public FizzBuzzTests ()
+        public FizzBuzzTests()
         {
         }
 
@@ -22,15 +22,15 @@ namespace KatasTests
         [TestCase(15, "FizzBuzz")]
         public void SingleNumber_ANumberIsPassed_ExpectedLiteral(int number, string literal)
         {
-            var fizzBuzz = new FizzBuzz ();
+            var fizzBuzz = new FizzBuzz();
             var result = fizzBuzz.ConvertSingle(number);
             result.Should().Be(literal);
         }
 
         [Test]
-        public void Run() 
+        public void Run()
         {
-            var fizzBuzz = new FizzBuzz ();
+            var fizzBuzz = new FizzBuzz();
             var result = fizzBuzz.Run(15);
             result.Should().Be("1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz");
         }
