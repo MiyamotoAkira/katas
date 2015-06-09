@@ -26,5 +26,17 @@ class EightQueenTests(unittest.TestCase):
     def test_find_next_square(self):
         eightQueen = eight_queens.EightQueen()
         eightQueen.add_queen_to_square((1,1))
+        eightQueen.eliminate_possibilities((1,1))
         square= eightQueen.find_next_square()
-        self.assertEqual(square,{1:3})
+        self.assertEqual(square,(2,3))
+
+    def test_create_board_has_64_squares(self):
+        eightQueen = eight_queens.EightQueen()
+        self.assertEqual(len(eightQueen.board), 64)
+
+
+    def test_eliminate_possibles(self):
+        eightQueen = eight_queens.EightQueen()
+        eightQueen.add_queen_to_square((1,1))
+        eightQueen.eliminate_possibilities((1,1))
+        self.assertTrue(len(eightQueen.board), 42)
