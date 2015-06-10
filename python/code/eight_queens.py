@@ -1,5 +1,7 @@
 class EightQueen():
-    '''This class resolves the Eight Queens problem. The problem stipulates to put 8 queen chess pieces on a chess board without any of them attacking another of the other queens'''
+    '''This class resolves the Eight Queens problem. The problem stipulates to put 8 queen chess pieces on a chess board without any of them attacking another of the other queens.
+    This solution doesn't use recursion and keeps the cmplete state of the board as history to be able to undo placements. So on that regards is O(1) to undo speed wise but O(n) on space usage
+    '''
     
     def __init__(self):
         self.table = dict()
