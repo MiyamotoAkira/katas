@@ -1,3 +1,5 @@
+import pdb
+
 class EightQueen():
     '''This class resolves the Eight Queens problem. The problem stipulates to put 8 queen chess pieces on a chess board without any of them attacking another of the other queens.
     This solution doesn't use recursion and keeps the cmplete state of the board as history to be able to undo placements. So on that regards is O(1) to undo speed wise but O(n) on space usage
@@ -25,17 +27,20 @@ class EightQueen():
         new_row, new_column = square
         self.board = {(row, column) for (row,column) in self.board if row != new_row}
         self.board = {(row, column) for (row,column) in self.board if column != new_column}
-        while new_row < 8 and new_column < 8:
-            new_row += 1
-            new_column += 1
-            if (new_row, new_column) in self.board:
-                self.board.remove((new_row, new_column))
 
-        while new_row < 8 and new_column > 1:
-            new_row += 1
-            new_column -= 1
-            if (new_row, new_column) in self.board:
-                self.board.remove((new_row, new_column))
+        counter_row, counter_column = new_row, new_column
+        while counter_row < 8 and counter_column < 8:
+            counter_row += 1
+            counter_column += 1
+            if (counter_row, counter_column) in self.board:
+                self.board.remove((counter_row, counter_column))
+
+        counter_row, counter_column = new_row, new_column
+        while counter_row < 8 and counter_column > 1:
+            counter_row += 1
+            counter_column -= 1
+            if (counter_row, counter_column) in self.board:
+                self.board.remove((counter_row, counter_column))
                 
     def get_table(self):
         return self.table
@@ -54,7 +59,6 @@ class EightQueen():
         possibilities = [(row, column) for (row, column) in self.board if row == next_row]
         
         self.sorted_possibilities = sorted(possibilities)
-        self.last_possibility = -1
         
     def undo_last_queen(self):
         self.last_possibility = self.history.pop()
@@ -76,7 +80,6 @@ class EightQueen():
         self.board = {(row,column) for row in range(1,9) for column in range(1,9)}
         self.history = list()
         self.last_possibility = -1
-
         
     def resolve_one(self):
         self.initialize()
@@ -87,6 +90,7 @@ class EightQueen():
                 square = self.find_next_square()
             if square is not None:
                 self.add_queen_to_square(square)
+                self.last_possibility = -1
             else:
                 if len(self.table) > 0:
                     self.undo_last_queen()

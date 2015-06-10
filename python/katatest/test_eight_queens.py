@@ -74,4 +74,4 @@ class EightQueenTests(unittest.TestCase):
     def test_resolve_one(self):
         eightQueen = eight_queens.EightQueen()
         solution = eightQueen.resolve_one()
-        self.assertEqual(solution, None)
+        self.assertEqual(solution, {1: 1, 2: 5, 3: 8, 4: 6, 5: 3, 6: 7, 7: 2, 8: 4})
