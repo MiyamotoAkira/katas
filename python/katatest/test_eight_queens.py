@@ -21,7 +21,7 @@ class EightQueenTests(unittest.TestCase):
     def test_remove_queen(self):
         eightQueen = eight_queens.EightQueen()
         eightQueen.add_queen_to_square((1,1))
-        eightQueen.remove_queen((1,1))
+        eightQueen.undo_last_queen()
         table = eightQueen.get_table()
         self.assertEqual(table,{})
 
@@ -29,7 +29,7 @@ class EightQueenTests(unittest.TestCase):
     def test_find_next_square(self):
         eightQueen = eight_queens.EightQueen()
         eightQueen.add_queen_to_square((1,1))
-        eightQueen.eliminate_possibilities((1,1))
+        eightQueen.setup_possibilities()
         square= eightQueen.find_next_square()
         self.assertEqual(square,(2,3))
 
@@ -42,19 +42,36 @@ class EightQueenTests(unittest.TestCase):
     def test_eliminate_possibilities(self):
         eightQueen = eight_queens.EightQueen()
         eightQueen.add_queen_to_square((1,1))
-        eightQueen.eliminate_possibilities((1,1))
         self.assertTrue(len(eightQueen.board), 42)
 
     def test_undo_last_queen(self):
         eightQueen = eight_queens.EightQueen()
         eightQueen.add_queen_to_square((1,1))
-        eightQueen.eliminate_possibilities((1,1))
+        eightQueen.setup_possibilities()
         square = eightQueen.find_next_square()
         eightQueen.add_queen_to_square(square)
-        eightQueen.eliminate_possibilities(square)
+        eightQueen.setup_possibilities()
         self.assertEqual(eightQueen.table, {1:1, 2:3})
         eightQueen.undo_last_queen()
         self.assertEqual(len(eightQueen.board), 42)
         self.assertEqual(eightQueen.table, {1:1})
 
-    #def test_go_next_option(self):
+    def test_go_next_option(self):
+        eightQueen = eight_queens.EightQueen()
+        eightQueen.setup_possibilities()
+        square = eightQueen.find_next_square()
+        self.assertEqual(square, (1,1))
+        square = eightQueen.find_next_square()
+        self.assertEqual(square, (1,2))
+
+    def test_go_next_option_no_option_left_returns_None(self):
+        eightQueen = eight_queens.EightQueen()
+        eightQueen.sorted_possibilities = [(1,1)]
+        eightQueen.last_possibility = 0
+        square = eightQueen.find_next_square()
+        self.assertEqual(square, None)
+
+    def test_resolve_one(self):
+        eightQueen = eight_queens.EightQueen()
+        solution = eightQueen.resolve_one()
+        self.assertEqual(solution, None)

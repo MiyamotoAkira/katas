@@ -4,21 +4,24 @@ class EightQueen():
     '''
     
     def __init__(self):
-        self.table = dict()
-        self.board = {(row,column) for row in range(1,9) for column in range(1,9)}
-        self.history = list()
+        self.initialize()
         
     def add_queen_to_square(self, square):
         row, column = square
         if row not in self.table:
-            self.history.append(dict(self.table))
+            self.save_history()
             self.table[row] = column
+            self.eliminate_possibilities(square)
             return True
         else:
             return False
 
-    def eliminate_possibilities(self, square):
+    def save_history(self):
+        self.history.append(dict(self.table))
         self.history.append(set(self.board))
+        self.history.append(self.last_possibility)
+
+    def eliminate_possibilities(self, square):
         new_row, new_column = square
         self.board = {(row, column) for (row,column) in self.board if row != new_row}
         self.board = {(row, column) for (row,column) in self.board if column != new_column}
@@ -41,15 +44,53 @@ class EightQueen():
         row, column = square
         del self.table[row]
 
-    def find_next_square(self):
+    def setup_possibilities(self):
         sorted_list = sorted(self.table.keys())
-        next_row = sorted_list[-1] + 1
+        if len(sorted_list) > 0:
+            next_row = sorted_list[-1] + 1
+        else:
+            next_row = 1
+
         possibilities = [(row, column) for (row, column) in self.board if row == next_row]
         
-        sorted_possibilities = sorted(possibilities)
-        return sorted_possibilities[0]
+        self.sorted_possibilities = sorted(possibilities)
+        self.last_possibility = -1
         
     def undo_last_queen(self):
+        self.last_possibility = self.history.pop()
         self.board = self.history.pop()
         self.table = self.history.pop()
+
+    def find_next_square(self):
+        self.last_possibility += 1
+        if self.are_there_possibilities_left():
+            return self.sorted_possibilities[self.last_possibility]
+        else:
+            return None
+
+    def are_there_possibilities_left(self):
+        return len(self.sorted_possibilities) > self.last_possibility
         
+    def initialize(self):
+        self.table = dict()
+        self.board = {(row,column) for row in range(1,9) for column in range(1,9)}
+        self.history = list()
+        self.last_possibility = -1
+
+        
+    def resolve_one(self):
+        self.initialize()
+        while len(self.table) < 8:
+            self.setup_possibilities()
+            square = None
+            while square is None and self.are_there_possibilities_left():
+                square = self.find_next_square()
+            if square is not None:
+                self.add_queen_to_square(square)
+            else:
+                if len(self.table) > 0:
+                    self.undo_last_queen()
+                else:
+                    return "No solution found"
+
+        return self.table
