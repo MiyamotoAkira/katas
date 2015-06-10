@@ -24,3 +24,5 @@ The following languages and katas are present
 * Python
   * FizzBuzz
   * Roman Numerals
+  * Tennis
+  * Eight Queen
