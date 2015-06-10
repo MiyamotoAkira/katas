@@ -1,5 +1,5 @@
 class Game():
-    def __init__(self, player1Score = 0, player2Score = 0):
+    def __init__(self, player1Score=0, player2Score=0):
         self.Player1Score = player1Score
         self.Player2Score = player2Score
 
@@ -10,7 +10,7 @@ class Game():
         self.Player2Score += 1
 
     def is_game_finished(self):
-        return self.player_in_range() and  self.diff_is_enough()
+        return self.player_in_range() and self.diff_is_enough()
 
     def player_in_range(self):
         return self.Player1Score > 3 or self.Player2Score > 3
@@ -50,7 +50,7 @@ class Game():
 
     def both_players_in_deuce_range(self):
         return self.Player1Score > 2 and self.Player2Score > 2
-    
+
     def get_result_player(self, player_score):
         if player_score == 0:
             return "Love"

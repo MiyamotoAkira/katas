@@ -1,14 +1,18 @@
 def convert_ones(number):
     return convert_digit_to_roman(number, "I", "V", "X")
 
+
 def convert_tens(number):
     return convert_digit_to_roman(number, "X", "L", "C")
+
 
 def convert_hundreds(number):
     return convert_digit_to_roman(number, "C", "D", "M")
 
+
 def convert_thousands(number):
     return convert_digit_to_roman(number, "M", "What?", "I Shouldn't Be Here")
+
 
 def convert_to_roman(number):
     ones = number % 10
@@ -20,6 +24,7 @@ def convert_to_roman(number):
     roman_hundreds = convert_hundreds(hundreds)
     roman_thousands = convert_thousands(thousands)
     return roman_thousands + roman_hundreds + roman_tens + roman_ones
+
 
 def convert_digit_to_roman(number, unit, half, over):
     if number == 0:

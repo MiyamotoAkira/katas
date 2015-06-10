@@ -2,12 +2,13 @@ import unittest
 from nose_parameterized import parameterized
 from code import tennis
 
+
 class TestTennis(unittest.TestCase):
     def test_gameStarts_gameisalllove(self):
         game = tennis.Game()
         self.assertEqual(game.Player1Score, 0)
         self.assertEqual(game.Player2Score, 0)
-        
+
     def test_player1Scores_gameisalllove_player1hasonepoint(self):
         game = tennis.Game()
         game.score_by_player1()
@@ -34,7 +35,10 @@ class TestTennis(unittest.TestCase):
         (8, 10, True),
         (5, 3, True)
     ])
-    def test_calculate_if_game_is_finished(self, player1_score, player2_score, expected):
+    def test_calculate_if_game_is_finished(self,
+                                           player1_score,
+                                           player2_score,
+                                           expected):
         game = tennis.Game(player1_score, player2_score)
         self.assertEqual(game.is_game_finished(), expected)
 

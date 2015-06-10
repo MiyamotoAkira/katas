@@ -4,14 +4,15 @@ def single_one(number):
 
     if (divBy3 and divBy5):
         return "FizzBuzz"
-    
+
     if (divBy3):
         return "Fizz"
 
     if (divBy5):
         return "Buzz"
-    
+
     return str(number)
+
 
 def fizz_buzz(limit):
     literals = []

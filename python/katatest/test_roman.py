@@ -2,6 +2,7 @@ import unittest
 from nose_parameterized import parameterized
 from code import romans
 
+
 class RomanTests(unittest.TestCase):
     @parameterized.expand([
         (1, "I"),
@@ -18,7 +19,6 @@ class RomanTests(unittest.TestCase):
         result = romans.convert_ones(number)
         self.assertEqual(result, expected)
 
-        
     @parameterized.expand([
         (1, "X"),
         (2, "XX"),
@@ -33,7 +33,6 @@ class RomanTests(unittest.TestCase):
     def test_tens(self, number, expected):
         result = romans.convert_tens(number)
         self.assertEqual(result, expected)
-
 
     @parameterized.expand([
         (1, "C"),
@@ -50,7 +49,6 @@ class RomanTests(unittest.TestCase):
         result = romans.convert_hundreds(number)
         self.assertEqual(result, expected)
 
-
     @parameterized.expand([
         (1, "M"),
         (2, "MM"),
@@ -59,7 +57,6 @@ class RomanTests(unittest.TestCase):
     def test_thousands(self, number, expected):
         result = romans.convert_thousands(number)
         self.assertEqual(result, expected)
-
 
     @parameterized.expand([
         (156, "CLVI"),
