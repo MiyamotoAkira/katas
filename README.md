@@ -26,3 +26,6 @@ The following languages and katas are present
   * Roman Numerals
   * Tennis
   * Eight Queen
+
+* Java
+  * FizzBuzz
