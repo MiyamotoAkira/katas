@@ -8,10 +8,9 @@ import static org.junit.Assert.assertThat;
  */
 public class FizzBuzzGetNumbersTests {
     @Test
-    public void GetNumbers ()
-    {
+    public void GetNumbers() {
         FizzBuzz fizzBuzz = new FizzBuzz();
         String result = fizzBuzz.GetNumbers(15);
-        assertThat(result, is ("1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz"));
+        assertThat(result, is("1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz"));
     }
 }

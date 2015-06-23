@@ -3,6 +3,7 @@
  */
 
 import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -17,16 +18,14 @@ public class FizzBuzzConvertNumberTests {
     private final int value;
     private final String expected;
 
-    public FizzBuzzConvertNumberTests(int value, String expected)
-    {
+    public FizzBuzzConvertNumberTests(int value, String expected) {
         this.value = value;
         this.expected = expected;
     }
 
     @Parameterized.Parameters
-    public static Collection<Object[]> SetParameters ()
-    {
-        return Arrays.asList( new Object[][]{
+    public static Collection<Object[]> SetParameters() {
+        return Arrays.asList(new Object[][]{
                 {1, "1"},
                 {2, "2"},
                 {3, "Fizz"},
@@ -41,8 +40,7 @@ public class FizzBuzzConvertNumberTests {
     }
 
     @Test
-    public void ConvertNumber()
-    {
+    public void ConvertNumber() {
         FizzBuzz fizzBuzz = new FizzBuzz();
         String result = fizzBuzz.ConvertNumber(this.value);
         assertThat(result, is(this.expected));
