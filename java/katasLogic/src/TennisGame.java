@@ -32,6 +32,17 @@ public class TennisGame {
             return "All Love";
         }
 
+        if (player1Points > 3)
+        {
+            return "Player1 Won";
+        }
+
+        if (player2Points > 3)
+        {
+            return "Player2 Won";
+        }
+
+
         String result = GetPlayerPointsAsString(player1Points);
         result += "-";
         result += GetPlayerPointsAsString(player2Points);
@@ -45,6 +56,10 @@ public class TennisGame {
                 return "Love";
             case 1:
                 return "15";
+            case 2:
+                return "30";
+            case 3:
+                return "40";
             default:
                 return "Not Implemented";
         }
