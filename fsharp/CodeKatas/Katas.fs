@@ -205,6 +205,123 @@ module Yathzee =
         | Yahtzee -> calculateYathzee dice
         | Chance -> calculateChance dice
 
+
+module Yathzee2 =
+    type Category = 
+        |Ones
+        |Twos
+        |Threes
+        |Fours
+        |Fives
+        |Sixes
+        |Pair 
+        |TwoPair 
+        |ThreeOfAKind 
+        |FourOfAKind 
+        |SmallStraight 
+        |LargeStraight 
+        |FullHouse 
+        |Yahtzee
+        |Chance
+
+    let values = [1; 2; 3; 4; 5; 6;]
+
+    let collect minimumRepetitions dice =
+        values 
+        |> List.map (fun x -> (x, (dice |> List.filter (fun y -> y = x) |> List.length))) 
+        |> List.filter ( fun (_,y) -> y > (minimumRepetitions - 1))
+
+    let calculatePair dice =
+        let atLeastPairs = dice |> collect 2
+        if atLeastPairs |> List.length > 0
+        then
+            let biggest = atLeastPairs |> List.reduce (fun max value -> 
+                                                        let x1, _ = value
+                                                        let x2, _ = max
+
+                                                        if x1 > x2 
+                                                        then value
+                                                        else max)
+            let value, _ = biggest
+            value * 2
+        else
+            0
+
+    let calculateTwoPair dice =
+        let atLeastPairs = dice |> collect 2
+        match atLeastPairs with
+        | head::second::[] -> atLeastPairs |> List.fold (fun acc elem -> 
+                                          let x, _ = elem
+                                          acc + (x * 2)) 0
+        | _ ->   0
+
+    let calculateThree dice =
+        let atLeastThree = dice |> collect 3
+        match atLeastThree with 
+        | head::[] -> atLeastThree |> List.fold (fun acc elem -> 
+                                          let x, _ = elem
+                                          acc + (x * 3)) 0
+        | _ -> 0
+
+
+    let calculateFour dice =
+        let atLeastFour = dice |> collect 4
+        match atLeastFour with 
+        | head::[] -> atLeastFour |> List.fold (fun acc elem -> 
+                                          let x, _ = elem
+                                          acc + (x * 4)) 0
+        | _ -> 0
+
+    let calculateStraight straight value dice = 
+        let sorted = dice |> List.sort
+        if sorted |> List.zip straight |> List.forall (fun (v1,v2) -> v1 = v2)
+        then value
+        else 0
+
+    let calculateSmall dice =
+        calculateStraight [1;2;3;4;5] 15 dice
+
+    let calculateLarge dice =
+        calculateStraight [2;3;4;5;6] 20 dice
+
+    let calculateFull dice =
+        let collected  = dice |> collect 2
+        match collected with
+        | (v1,y1) :: (v2,y2) ::[] when (y1 = 2 && y2 = 3) || (y1 = 3 && y2 = 2)-> (v1 * y1) + (v2 * y2)
+        | _ -> 0
+
+    let calculateYathzee dice =
+        let collected = dice |> collect 5
+        match collected with
+        | head::[] -> 50
+        | _ -> 0
+
+    let calculateChance dice =
+        dice |> List.sum
+
+    let calculateSingles dieValue dice =
+        dice |> List.filter (fun y -> y = dieValue) |> List.sum
+
+    let calculateScore category d1 d2 d3 d4 d5 =
+        let dice = [d1; d2; d3; d4; d5]
+        match category with
+        | Ones -> calculateSingles 1 dice
+        | Twos -> calculateSingles 2 dice
+        | Threes -> calculateSingles 3 dice
+        | Fours -> calculateSingles 4 dice
+        | Fives -> calculateSingles 5 dice
+        | Sixes -> calculateSingles 6 dice
+        | Pair -> calculatePair dice
+        | TwoPair -> calculateTwoPair dice
+        | ThreeOfAKind -> calculateThree dice
+        | FourOfAKind -> calculateFour dice
+        | SmallStraight -> calculateSmall dice
+        | LargeStraight -> calculateLarge dice
+        | FullHouse -> calculateFull dice
+        | Yahtzee -> calculateYathzee dice
+        | Chance -> calculateChance dice
+
+
 module RomanNumerals =
     let getOnesValue digit =
         match digit with

@@ -96,7 +96,7 @@ module TestTennis =
 
 module TestYathzee =
 
-    open Katas.Yathzee
+    open Katas.Yathzee2
     open NUnit.Framework
     open FsUnit
 
@@ -532,6 +532,7 @@ def test_chop
   assert_equal(-1, chop(8, [1, 3, 5, 7]))
 end *)
 
+(*
 module KarateChopTests =
     open NUnit.Framework
     open FsUnit
@@ -560,7 +561,7 @@ module KarateChopTests =
     let ``chop the array with expected result`` expectedLocation valueToFind array =
         let location = chop valueToFind array
         location |> should equal expectedLocation
-
+        *)
 
 (*
 
