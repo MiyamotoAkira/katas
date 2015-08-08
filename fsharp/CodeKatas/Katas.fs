@@ -236,10 +236,7 @@ module Yathzee2 =
         match atLeastPairs with
         | head::_ ->
             let value, _ = atLeastPairs |> List.reduce (fun max value -> 
-                                                        let x1, _ = value
-                                                        let x2, _ = max
-
-                                                        if x1 > x2 
+                                                        if fst value > fst max 
                                                         then value
                                                         else max)
             value * 2
@@ -263,9 +260,11 @@ module Yathzee2 =
     let calculateFour dice =
         calculateMultiple 4 dice
 
+    let isAStraightOfType straight dice =
+        dice |> List.sort |> List.zip straight |> List.forall (fun (v1,v2) -> v1 = v2)
+
     let calculateStraight straight value dice = 
-        let sorted = dice |> List.sort
-        if sorted |> List.zip straight |> List.forall (fun (v1,v2) -> v1 = v2)
+        if dice |> isAStraightOfType straight
         then value
         else 0
 
@@ -278,7 +277,7 @@ module Yathzee2 =
     let calculateFull dice =
         let collected  = dice |> collect 2
         match collected with
-        | (v1,y1) :: (v2,y2) ::[] when (y1 = 2 && y2 = 3) || (y1 = 3 && y2 = 2)-> (v1 * y1) + (v2 * y2)
+        | (v1,y1) :: (v2,y2) ::[] when (y1, y2) = (2, 3) || (y1 ,y2) = (3, 2)-> (v1 * y1) + (v2 * y2)
         | _ -> 0
 
     let calculateYathzee dice =
