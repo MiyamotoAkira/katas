@@ -229,48 +229,39 @@ module Yathzee2 =
     let collect minimumRepetitions dice =
         values 
         |> List.map (fun x -> (x, (dice |> List.filter (fun y -> y = x) |> List.length))) 
-        |> List.filter ( fun (_,y) -> y > (minimumRepetitions - 1))
+        |> List.filter ( fun (_,y) -> y >= minimumRepetitions)
 
     let calculatePair dice =
         let atLeastPairs = dice |> collect 2
-        if atLeastPairs |> List.length > 0
-        then
-            let biggest = atLeastPairs |> List.reduce (fun max value -> 
+        match atLeastPairs with
+        | head::_ ->
+            let value, _ = atLeastPairs |> List.reduce (fun max value -> 
                                                         let x1, _ = value
                                                         let x2, _ = max
 
                                                         if x1 > x2 
                                                         then value
                                                         else max)
-            let value, _ = biggest
             value * 2
-        else
-            0
+        | _ -> 0
+    
+    let calculateMultiple multiple dice =
+        let multipleDice = dice |> collect multiple
+        match multipleDice with 
+        | (x, _)::[] -> x * multiple
+        | _ -> 0
 
     let calculateTwoPair dice =
         let atLeastPairs = dice |> collect 2
         match atLeastPairs with
-        | head::second::[] -> atLeastPairs |> List.fold (fun acc elem -> 
-                                          let x, _ = elem
-                                          acc + (x * 2)) 0
+        | (x, _)::(y,_)::[] -> x * 2 + y * 2
         | _ ->   0
 
     let calculateThree dice =
-        let atLeastThree = dice |> collect 3
-        match atLeastThree with 
-        | head::[] -> atLeastThree |> List.fold (fun acc elem -> 
-                                          let x, _ = elem
-                                          acc + (x * 3)) 0
-        | _ -> 0
-
+        calculateMultiple 3 dice
 
     let calculateFour dice =
-        let atLeastFour = dice |> collect 4
-        match atLeastFour with 
-        | head::[] -> atLeastFour |> List.fold (fun acc elem -> 
-                                          let x, _ = elem
-                                          acc + (x * 4)) 0
-        | _ -> 0
+        calculateMultiple 4 dice
 
     let calculateStraight straight value dice = 
         let sorted = dice |> List.sort
