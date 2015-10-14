@@ -13,11 +13,18 @@
     <OutputPath>bin\Debug</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
+    <Optimize>true</Optimize>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
+    <Optimize>true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -28,16 +35,17 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="FsUnit.CustomMatchers">
+      <HintPath>..\packages\FsUnit.1.3.1.0\lib\FsUnit.CustomMatchers.dll</HintPath>
+    </Reference>
     <Reference Include="FsUnit.NUnit">
-      <HintPath>..\packages\FsUnit.1.3.0.1\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+      <HintPath>..\packages\FsUnit.1.3.1.0\lib\FsUnit.NUnit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Katas.fs" />
     <Compile Include="Tests.fs" />
-    <Compile Include="Component1.fs" />
-    <Compile Include="Script.fsx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
   <ItemGroup>
