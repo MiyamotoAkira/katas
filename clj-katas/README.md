@@ -1,14 +1,13 @@
 # clj-katas
 
-A Clojure library designed to ... well, that part is up to you.
+This is a collection of katas done on clojure. The majority of the katas come from the [Coding Dojo](http://codingdojo.org/KataCatalogue/)
 
 ## Usage
 
-FIXME
+Currently this is just a library with no executable
 
 ## License
 
-Copyright © 2016 FIXME
+Copyright © 2016 Jorge Gueorguiev Garcia
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+For full License check root of application. But is the MIT License.
