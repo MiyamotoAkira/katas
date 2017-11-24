@@ -5,7 +5,7 @@ open Xunit
 open GameOfLife.Universe
 
 let compare expectedUniverse actualUniverse =
-    Assert.True ((compareList expectedUniverse actualUniverse),  sprintf "Should be %A but was %A" expectedUniverse actualUniverse)
+    Assert.True ((CompareList expectedUniverse actualUniverse),  sprintf "Should be %A but was %A" expectedUniverse actualUniverse)
 
 [<Fact>]
 let ``Empty Universe returns Empty Universe`` () =
@@ -22,7 +22,7 @@ let ``Universe with one cell returns Empty Universe`` () =
     |> compare universe
 
 [<Fact>]
-let ``Universe with one cell  surrounded by two returns Universe with single cell`` () =
+let ``Universe with one cell surrounded by two returns Universe with single cell`` () =
     let universeWithThree = [ { xPosition = 0; yPosition = 0}; { xPosition = 1; yPosition = 1}; { xPosition = 2; yPosition = 2}  ]
     let universe = [{ xPosition = 1; yPosition = 1}]
     NextUniverse universeWithThree
@@ -42,13 +42,13 @@ let ``get neighbours`` ()=
 let ``compare two cells`` () =
     let cell1 = {xPosition = 0; yPosition = 0}
     let cell2 = {xPosition = 0; yPosition = 0}
-    Assert.True (compareCell cell1 cell2)
+    Assert.True (CompareCell cell1 cell2)
 
 [<Fact>]
 let ``compare contents`` () =
     let cell1 = [{xPosition = 0; yPosition = 0}]
     let cell2 = [{xPosition = 0; yPosition = 0}]
-    Assert.True (compareContents cell1 cell2)
+    Assert.True (CompareContents cell1 cell2)
 
 [<Fact>]
 let ``Two neighbours then alive`` () =
@@ -66,3 +66,17 @@ let ``Four neighbours then dead`` () =
 [<Fact>]
 let ``One neighbours then dead`` () =
     Assert.False (CheckIfAlive {xPosition = 0; yPosition = 0} [{xPosition = 1; yPosition = 1}])
+
+[<Fact>]
+let ``Empty cell becomes alive`` () =
+    let universeWithThree = [ { xPosition = -1; yPosition = -1}; { xPosition = 1; yPosition = 1}; { xPosition = -1; yPosition = 1}  ]
+    let universe = [{ xPosition = 0; yPosition = 0}]
+    NextUniverse universeWithThree
+    |> compare universe
+
+[<Fact>]
+let ``Empty cell is born`` () =
+    let universeWithThree = [ { xPosition = -1; yPosition = -1}; { xPosition = 1; yPosition = 1}; { xPosition = -1; yPosition = 1}  ]
+    let universe = [{ xPosition = 0; yPosition = 0}]
+    Born universeWithThree
+    |> compare universe
