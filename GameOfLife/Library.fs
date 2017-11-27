@@ -9,21 +9,20 @@ module Universe =
         List.fold (fun acc elem -> { xPosition = cell.xPosition + fst elem; yPosition = cell.yPosition +  snd elem} :: acc) [] neighbours
         |> List.rev
 
-
     let FindOnUniverse list1 list2 =
         List.filter (fun (x) -> List.exists (fun(y) -> x = y) list2) list1
 
     let CheckIfAlive cell universe =
-        let neighbours = GetNeighbours cell
-        let alive = FindOnUniverse universe neighbours
-        (List.length alive) = 2 || (List.length alive = 3)
+        let mutable alive  = GetNeighbours cell
+        alive <- FindOnUniverse universe alive
+        (List.length alive) = 2
+        || (List.length alive = 3)
 
     let CheckIfThree cell universe =
         let neighbours = GetNeighbours cell
         let alive = FindOnUniverse universe neighbours
         List.length alive = 3
 
-        
     let CompareCell cell1 cell2 =
         (cell1.xPosition = cell2.xPosition) && (cell1.yPosition = cell2.yPosition)
 
@@ -49,7 +48,7 @@ module Universe =
                       | false -> acc) []
  
     let NextUniverse universe =
-        List.fold (fun acc elem -> 
+        List.fold (fun acc elem ->
         match CheckIfAlive elem universe with
         | false -> acc 
         | true -> elem :: acc) [] universe @ (Born universe)

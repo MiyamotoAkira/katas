@@ -69,10 +69,13 @@ let ``One neighbours then dead`` () =
 
 [<Fact>]
 let ``Empty cell becomes alive`` () =
-    let universeWithThree = [ { xPosition = -1; yPosition = -1}; { xPosition = 1; yPosition = 1}; { xPosition = -1; yPosition = 1}  ]
+    let universeWithThree = [
+        { xPosition = -1; yPosition = -1};
+        { xPosition = 1; yPosition = 1};
+        { xPosition = -1; yPosition = 1}]
     let universe = [{ xPosition = 0; yPosition = 0}]
-    NextUniverse universeWithThree
-    |> compare universe
+    let actualUniverse = NextUniverse universeWithThree
+    Assert.True (CompareList universe actualUniverse)
 
 [<Fact>]
 let ``Empty cell is born`` () =
