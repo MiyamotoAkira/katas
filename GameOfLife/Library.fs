@@ -5,17 +5,14 @@ module Universe =
 
     let neighbours = [(-1,-1); (0, -1); (1, -1); (-1, 0); (1, 0); (-1, 1); (0, 1); (1, 1);]
 
-        
+    let AddNeighbour cell mods universe =
+        { xPosition = cell.xPosition + fst mods;
+          yPosition = cell.yPosition +  snd mods}
+        :: universe
+
     let GetNeighbours (cell:Cell) : List<Cell> =
-        let rec FindNeighbours cU nU =
-            match cU with
-            | [] -> nU
-            | H::T ->
-                FindNeighbours T ({ xPosition = cell.xPosition + fst H;
-                                    yPosition = cell.yPosition +  snd H}
-                                  :: nU)
-        FindNeighbours neighbours []
-        //List.fold (fun acc elem -> { xPosition = cell.xPosition + fst elem; yPosition = cell.yPosition +  snd elem} :: acc) [] neighbours
+        let CalculateNeighboursForCell acc elem = AddNeighbour cell elem acc
+        List.fold CalculateNeighboursForCell [] neighbours
         |> List.rev
 
     let FindOnUniverse list1 list2 =

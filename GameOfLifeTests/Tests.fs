@@ -33,9 +33,14 @@ let ``Universe with one cell surrounded by two returns Universe with single cell
 let ``get neighbours`` ()=
     let cell = {xPosition = 0; yPosition = 0}
     let neighbours = GetNeighbours cell
-    let expected = [ { xPosition = -1; yPosition = -1}; { xPosition = 0; yPosition = -1}; { xPosition = 1; yPosition = -1};
-                      { xPosition = -1; yPosition = 0}; { xPosition = 1; yPosition = 0};
-                      { xPosition = -1; yPosition = 1}; { xPosition = 0; yPosition = 1}; { xPosition = 1; yPosition = 1}]
+    let expected = [ { xPosition = -1; yPosition = -1};
+                     { xPosition = 0; yPosition = -1};
+                     { xPosition = 1; yPosition = -1};
+                     { xPosition = -1; yPosition = 0};
+                     { xPosition = 1; yPosition = 0};
+                     { xPosition = -1; yPosition = 1};
+                     { xPosition = 0; yPosition = 1};
+                     { xPosition = 1; yPosition = 1}]
     compare expected neighbours
 
 [<Fact>]
@@ -67,16 +72,19 @@ let ``Four neighbours then dead`` () =
 let ``One neighbours then dead`` () =
     Assert.False (CheckIfAlive {xPosition = 0; yPosition = 0} [{xPosition = 1; yPosition = 1}])
 
+let singleCellUniverse = [{ xPosition = 0; yPosition = 0}]
+
+let CompareExpected actualUniverse =
+    Assert.True (CompareList singleCellUniverse actualUniverse)
+
 [<Fact>]
 let ``Empty cell becomes alive`` () =
-    let universeWithThree = [
-        { xPosition = -1; yPosition = -1};
-        { xPosition = 1; yPosition = 1};
-        { xPosition = -1; yPosition = 1}]
-    let universe = [{ xPosition = 0; yPosition = 0}]
-    let actualUniverse = NextUniverse universeWithThree
-    Assert.True (CompareList universe actualUniverse)
-
+    [{ xPosition = -1; yPosition = -1};
+     { xPosition = 1; yPosition = 1};
+     { xPosition = -1; yPosition = 1}]
+    |> NextUniverse
+    |> CompareExpected
+    
 [<Fact>]
 let ``Empty cell is born`` () =
     let universeWithThree = [ { xPosition = -1; yPosition = -1}; { xPosition = 1; yPosition = 1}; { xPosition = -1; yPosition = 1}  ]
