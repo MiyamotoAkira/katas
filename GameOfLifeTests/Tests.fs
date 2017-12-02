@@ -89,5 +89,5 @@ let ``Empty cell becomes alive`` () =
 let ``Empty cell is born`` () =
     let universeWithThree = [ { xPosition = -1; yPosition = -1}; { xPosition = 1; yPosition = 1}; { xPosition = -1; yPosition = 1}  ]
     let universe = [{ xPosition = 0; yPosition = 0}]
-    Born universeWithThree
+    BornWithThree universeWithThree
     |> compare universe

@@ -5,6 +5,16 @@ module Universe =
 
     let neighbours = [(-1,-1); (0, -1); (1, -1); (-1, 0); (1, 0); (-1, 1); (0, 1); (1, 1);]
 
+    let CompareCell cell1 cell2 =
+        (cell1.xPosition = cell2.xPosition) && (cell1.yPosition = cell2.yPosition)
+
+    let CompareContents list1 list2 =
+        List.zip list1 list2
+        |> List.forall (fun (x) -> CompareCell (fst x) (snd x))
+
+    let CompareList list1 list2 =
+        (List.length list1) = (List.length list2) && (CompareContents list1 list2)
+
     let AddNeighbour cell mods universe =
         { xPosition = cell.xPosition + fst mods;
           yPosition = cell.yPosition +  snd mods}
@@ -18,6 +28,12 @@ module Universe =
     let FindOnUniverse list1 list2 =
         List.filter (fun (x) -> List.exists (fun(y) -> x = y) list2) list1
 
+    let NotIn list =
+        fun x -> not (List.exists (fun y -> CompareCell x y) list)
+        
+    let NotAnyIn list from =
+        List.filter (NotIn list) from
+
     let CheckIfAlive cell universe =
         let mutable alive  = GetNeighbours cell
         alive <- FindOnUniverse universe alive
@@ -29,32 +45,27 @@ module Universe =
         let alive = FindOnUniverse universe neighbours
         List.length alive = 3
 
-    let CompareCell cell1 cell2 =
-        (cell1.xPosition = cell2.xPosition) && (cell1.yPosition = cell2.yPosition)
+    let CollateNeighbours acc elem = (GetNeighbours elem) @ acc
 
-    let CompareContents list1 list2 =
-        List.zip list1 list2
-        |> List.forall (fun (x) -> CompareCell (fst x) (snd x))
-
-    let CompareList list1 list2 =
-        (List.length list1) = (List.length list2) && (CompareContents list1 list2)
-
-    let Born universe =
+    let Born check universe =
         //get all neighbours from live cells
-        List.fold (fun acc elem -> (GetNeighbours elem) @ acc) [] universe
+        List.fold CollateNeighbours [] universe
         //dedup all neighbours
         |> Set.ofList
         |> Set.toList
         //eliminate cells that are alive already
-        |> List.filter (fun x -> not (List.exists (fun y -> CompareCell x y) universe))
+        |> NotAnyIn universe
         //for remaining cells find if has three neighbours
         |> List.fold (fun acc elem ->
-                      match CheckIfThree elem universe with
+                      match check elem universe with
                       | true -> elem :: acc
                       | false -> acc) []
+
+    let BornWithThree universe =
+        Born CheckIfThree universe
  
     let NextUniverse universe =
         List.fold (fun acc elem ->
         match CheckIfAlive elem universe with
         | false -> acc 
-        | true -> elem :: acc) [] universe @ (Born universe)
+        | true -> elem :: acc) [] universe @ (BornWithThree universe)
