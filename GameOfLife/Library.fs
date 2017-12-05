@@ -1,12 +1,12 @@
 namespace GameOfLife
 module Universe =
 
-    type Cell = {xPosition: int; yPosition: int}
+    type Cell = {x: int; y: int}
 
     let neighbours = [(-1,-1); (0, -1); (1, -1); (-1, 0); (1, 0); (-1, 1); (0, 1); (1, 1);]
 
     let CompareCell cell1 cell2 =
-        (cell1.xPosition = cell2.xPosition) && (cell1.yPosition = cell2.yPosition)
+        (cell1.x = cell2.x) && (cell1.y = cell2.y)
 
     let CompareContents list1 list2 =
         List.zip list1 list2
@@ -16,8 +16,8 @@ module Universe =
         (List.length list1) = (List.length list2) && (CompareContents list1 list2)
 
     let AddNeighbour cell mods universe =
-        { xPosition = cell.xPosition + fst mods;
-          yPosition = cell.yPosition +  snd mods}
+        { x = cell.x + fst mods;
+          y = cell.y + snd mods}
         :: universe
 
     let GetNeighbours (cell:Cell) : List<Cell> =

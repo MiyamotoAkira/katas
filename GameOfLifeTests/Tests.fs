@@ -16,78 +16,78 @@ let ``Empty Universe returns Empty Universe`` () =
 
 [<Fact>]
 let ``Universe with one cell returns Empty Universe`` () =
-    let universeWithOne = [ { xPosition = 0; yPosition = 0} ]
+    let universeWithOne = [ { x = 0; y = 0} ]
     let universe = []
     NextUniverse universeWithOne
     |> compare universe
 
 [<Fact>]
 let ``Universe with one cell surrounded by two returns Universe with single cell`` () =
-    let universeWithThree = [ { xPosition = 0; yPosition = 0}; { xPosition = 1; yPosition = 1}; { xPosition = 2; yPosition = 2}  ]
-    let universe = [{ xPosition = 1; yPosition = 1}]
+    let universeWithThree = [ { x = 0; y = 0}; { x = 1; y = 1}; { x = 2; y = 2}  ]
+    let universe = [{ x = 1; y = 1}]
     NextUniverse universeWithThree
     |> compare universe
 
 
 [<Fact>]
 let ``get neighbours`` ()=
-    let cell = {xPosition = 0; yPosition = 0}
+    let cell = {x = 0; y = 0}
     let neighbours = GetNeighbours cell
-    let expected = [ { xPosition = -1; yPosition = -1};
-                     { xPosition = 0; yPosition = -1};
-                     { xPosition = 1; yPosition = -1};
-                     { xPosition = -1; yPosition = 0};
-                     { xPosition = 1; yPosition = 0};
-                     { xPosition = -1; yPosition = 1};
-                     { xPosition = 0; yPosition = 1};
-                     { xPosition = 1; yPosition = 1}]
+    let expected = [ { x = -1; y = -1};
+                     { x = 0; y = -1};
+                     { x = 1; y = -1};
+                     { x = -1; y = 0};
+                     { x = 1; y = 0};
+                     { x = -1; y = 1};
+                     { x = 0; y = 1};
+                     { x = 1; y = 1}]
     compare expected neighbours
 
 [<Fact>]
 let ``compare two cells`` () =
-    let cell1 = {xPosition = 0; yPosition = 0}
-    let cell2 = {xPosition = 0; yPosition = 0}
+    let cell1 = {x = 0; y = 0}
+    let cell2 = {x = 0; y = 0}
     Assert.True (CompareCell cell1 cell2)
 
 [<Fact>]
 let ``compare contents`` () =
-    let cell1 = [{xPosition = 0; yPosition = 0}]
-    let cell2 = [{xPosition = 0; yPosition = 0}]
+    let cell1 = [{x = 0; y = 0}]
+    let cell2 = [{x = 0; y = 0}]
     Assert.True (CompareContents cell1 cell2)
 
 [<Fact>]
 let ``Two neighbours then alive`` () =
-    Assert.True (CheckIfAlive {xPosition = 0; yPosition = 0} [{xPosition = 1; yPosition = 0}; {xPosition = 1; yPosition = 1}])
+    Assert.True (CheckIfAlive {x = 0; y = 0} [{x = 1; y = 0}; {x = 1; y = 1}])
 
 [<Fact>]
 let ``Three neighbours then alive`` () =
-    Assert.True (CheckIfAlive {xPosition = 0; yPosition = 0} [{xPosition = 1; yPosition = 0}; {xPosition = 1; yPosition = 1}; {xPosition = -1; yPosition = 0}])
+    Assert.True (CheckIfAlive {x = 0; y = 0} [{x = 1; y = 0}; {x = 1; y = 1}; {x = -1; y = 0}])
 
 [<Fact>]
 let ``Four neighbours then dead`` () =
-    Assert.False (CheckIfAlive {xPosition = 0; yPosition = 0} [{xPosition = 1; yPosition = 0}; {xPosition = 1; yPosition = 1}; {xPosition = -1; yPosition = 0}; {xPosition = 1; yPosition = -1};])
+    Assert.False (CheckIfAlive {x = 0; y = 0} [{x = 1; y = 0}; {x = 1; y = 1}; {x = -1; y = 0}; {x = 1; y = -1};])
 
 
 [<Fact>]
 let ``One neighbours then dead`` () =
-    Assert.False (CheckIfAlive {xPosition = 0; yPosition = 0} [{xPosition = 1; yPosition = 1}])
+    Assert.False (CheckIfAlive {x = 0; y = 0} [{x = 1; y = 1}])
 
-let singleCellUniverse = [{ xPosition = 0; yPosition = 0}]
+let singleCellUniverse = [{ x = 0; y = 0}]
 
 let CompareExpected actualUniverse =
     Assert.True (CompareList singleCellUniverse actualUniverse)
 
 [<Fact>]
 let ``Empty cell becomes alive`` () =
-    [{ xPosition = -1; yPosition = -1};
-     { xPosition = 1; yPosition = 1};
-     { xPosition = -1; yPosition = 1}]
+    [{ x = -1; y = -1};
+     { x = 1; y = 1};
+     { x = -1; y = 1}]
     |> NextUniverse
     |> CompareExpected
     
 [<Fact>]
 let ``Empty cell is born`` () =
-    let universeWithThree = [ { xPosition = -1; yPosition = -1}; { xPosition = 1; yPosition = 1}; { xPosition = -1; yPosition = 1}  ]
-    let universe = [{ xPosition = 0; yPosition = 0}]
+    let universeWithThree = [ { x = -1; y = -1}; { x = 1; y = 1}; { x = -1; y = 1}  ]
+    let universe = [{ x = 0; y = 0}]
     BornWithThree universeWithThree
     |> compare universe
