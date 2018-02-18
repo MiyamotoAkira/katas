@@ -63,21 +63,6 @@ dlldata.c
 *.svclog
 *.scc
 
-# Chutzpah Test files
-_Chutzpah*
-
-# MightyMoose
-*.mm.*
-AutoTest.Net/
-
-# Publish Web Output
-*.[Pp]ublish.xml
-*.azurePubxml
-# TODO: Comment the next line if you want to checkin your web deploy settings 
-# but database connection strings (with potential passwords) will be unencrypted
-*.pubxml
-*.publishproj
-
 # NuGet Packages
 *.nupkg
 # The packages folder can be ignored because of Package Restore
@@ -207,3 +192,16 @@ java/**/.gradletasknamecache
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # java/**/gradle/wrapper/gradle-wrapper.properties
+
+#Clojure
+clj/**/target
+clj/**/classes
+clj/**/checkouts
+clj/**/pom.xml
+clj/**/pom.xml.asc
+clj/**/*.jar
+clj/**/*.class
+clj/**/.lein-*
+clj/**/.nrepl-port
+**.hgignore
+.hg/
