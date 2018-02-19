@@ -30,7 +30,7 @@
 
 (defn skip-alive
   [selected universe]
-  (set (filter #(not (contains? (set universe) %)) selected)))
+  (set (filter #(not ((set universe) %)) selected)))
 
 (defn find-new-borns
   [universe]

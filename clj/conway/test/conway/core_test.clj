@@ -83,7 +83,17 @@
   (testing "Dead cell with four neighbours"
     (is (= '() (find-new-borns [[1 0] [0 1] [2 1] [0 0] [5 5]])))))
 
+(deftest skip-alive-tests
+  (testing "With single alive cell returns all neighbours"
+    (is (= #{[1 0] [-1 0] [1 1] [-1 -1] [1 -1] [-1 1] [0 -1] [0 1]} (skip-alive (get-neighbours [0 0]) [[0 0]]))))
+
+  (testing "Eliminates the two alive cells"
+    (is (= #{[1 0] [-1 0] [1 -1] [-1 1] [0 -1] [0 1]} (skip-alive (get-neighbours [0 0]) [ [1 1] [-1 -1]])))))
 
 (deftest single-pass
-  (testing "Simple slider creates the next step"
+  (testing "Block still life"
+    (is (= [[0 0] [0 1] [1 0] [1 1]] (conway-steps 1 [[0 0] [0 1] [1 0] [1 1]]))))
+  (testing "Simple Oscillator one step"
+    (is (= #{[0 0] [0 1] [0 -1]} (set (conway-steps 1 [[0 0] [1 0] [-1 0]])))))
+  (testing "Simple glider creates the next step"
     (= [] (conway-steps 1 [[0 0] [0 1] [1 1] [2 1]]))))
