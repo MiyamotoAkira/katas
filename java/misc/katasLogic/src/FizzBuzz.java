@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by akira on 22/06/15.
  */
 public class FizzBuzz {

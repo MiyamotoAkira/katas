@@ -5,17 +5,17 @@
 (deftest neighbours-test
   (testing "locate correct neighbours 0,0"
     (let [expected [[-1 -1] [-1  0] [-1  1] [0  -1] [0  1] [1  -1] [1  0] [1  1]]]
-      (is (= expected (get-neighbours [0 0])))))
+      (is (= expected (get-neighbours-s [0 0])))))
   (testing "locate correct neighbours 2,1"
     (let [expected [[1 0] [1  1] [1  2] [2  0] [2  2] [3  -0] [3  1] [3  2]]]
-      (is (= expected (get-neighbours [2 1]))))))
+      (is (= expected (get-neighbours-s [2 1]))))))
 
 
 (deftest is-neighbour-test
   (testing "cell is neighbour"
-    (is (is-neighbour [2 1] [3 0])))
+    (is (is-neighbour? [2 1] [3 0])))
   (testing "cell is not neighbour"
-    (is (not (is-neighbour [2 1] [4 5])))))
+    (is (not (is-neighbour? [2 1] [4 5])))))
 
 
 (deftest rule-alive-test
@@ -31,23 +31,23 @@
 
 (deftest find-alive-neighbours-test
   (testing "No alive neighbours"
-    (is (= [] (find-alive-neighbours [0 0] [[3 3] [4 5]]))))
+    (is (= [] (find-alive-neighbours [[3 3] [4 5]] [0 0]))))
   (testing "Find two  neighbours"
-    (is (= [[0 1] [1 1]] (find-alive-neighbours [0 0] [[0 1] [3 3] [1 1] [4 5]])))))
+    (is (= [[0 1] [1 1]] (find-alive-neighbours [[0 1] [3 3] [1 1] [4 5]] [0 0])))))
 
 
 (deftest dying
   (testing "Single cell"
-    (is (not (new-cell-status [0 0] [[3 3] [0 1] [5 4]]))))
+    (is (not (new-cell-status [[3 3] [0 1] [5 4]] [0 0]))))
   (testing "Four Cells"
-    (is (not (new-cell-status [0 0] [[1 1] [1 0] [-1 -1] [-1 0]])))))
+    (is (not (new-cell-status [[1 1] [1 0] [-1 -1] [-1 0]] [0 0])))))
 
 
 (deftest staying-alive
   (testing "Two cells"
-    (is (new-cell-status [0 0] [[1 0] [2 4] [-1 0] [5 6]])))
+    (is (new-cell-status [[1 0] [2 4] [-1 0] [5 6]] [0 0])))
   (testing "Three cells"
-    (is (new-cell-status [0 0] [[1 0] [2 4] [-1 0] [5 6] [1 1]]))))
+    (is (new-cell-status [[1 0] [2 4] [-1 0] [5 6] [1 1]] [0 0]))))
 
 
 (deftest rule-born-tests
@@ -92,8 +92,8 @@
 
 (deftest single-pass
   (testing "Block still life"
-    (is (= [[0 0] [0 1] [1 0] [1 1]] (conway-steps 1 [[0 0] [0 1] [1 0] [1 1]]))))
+    (is (= [[0 0] [0 1] [1 0] [1 1]] (conway-step [[0 0] [0 1] [1 0] [1 1]]))))
   (testing "Simple Oscillator one step"
-    (is (= #{[0 0] [0 1] [0 -1]} (set (conway-steps 1 [[0 0] [1 0] [-1 0]])))))
-  (testing "Simple glider creates the next step"
-    (= [] (conway-steps 1 [[0 0] [0 1] [1 1] [2 1]]))))
+    (is (= #{[0 0] [0 1] [0 -1]} (set (conway-step [[0 0] [1 0] [-1 0]])))))
+  (testing "Nothing sandwich"
+    (= [] (conway-step [[0 0] [0 1] [1 1] [2 1]]))))
