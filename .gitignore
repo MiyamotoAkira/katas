@@ -205,3 +205,14 @@ clj/**/.lein-*
 clj/**/.nrepl-port
 **.hgignore
 .hg/
+
+
+#Elixir
+elixir/**/_build/
+elixir/**/cover/
+elixir/**/deps/
+elixir/**/doc/
+elixir/**/.fetch
+elixir/**/erl_crash.dump
+elixir/**/*.ez
+elixir/**/-*.tar
