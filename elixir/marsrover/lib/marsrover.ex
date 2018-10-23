@@ -23,17 +23,58 @@ defmodule Marsrover do
 
   def move_rover(world, rover) do
     rover[:moves]
-    |> Enum.reduce(rover[:position], &single_move/2)
+    |> Enum.reduce(rover[:position], fn move, position -> single_move(world, move, position) end)
   end
 
-  def single_move(move, position) do
+  def single_move(world, move, position) do
     case move do
       :L -> move_left(position)
       :R -> move_right(position)
       :M -> move_forward(position)
     end
+    |> wrap(world)
   end
 
+  def wrap(position, world) do
+    position
+    |> wrap_high_y(world)
+    |> wrap_low_y(world)
+    |> wrap_high_x(world)
+    |> wrap_low_x(world)
+  end
+
+  def wrap_high_y(position, world) do
+    if position.y > world.y  do
+      %{position | y: 1}
+    else 
+      position
+    end
+  end
+
+  def wrap_low_y(position, world) do
+    if position.y < 1 do
+      %{position | y: world.y}
+    else 
+      position
+    end
+  end
+
+  def wrap_high_x(position, world) do
+    if position.x > world.x do
+      %{position | x: 1}
+    else 
+      position
+    end
+  end
+
+  def wrap_low_x(position, world) do
+    if position.x < 1 do
+      %{position | x: world.x}
+    else
+      position
+    end
+  end
+  
   def move_left(position) do
     case position.direction do
       :N -> %{position | direction: :W}

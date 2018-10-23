@@ -100,7 +100,8 @@ defmodule MarsroverTest do
   end
 
   test_with_params "single_move", fn position, expected_output, move ->
-    actual_output = Marsrover.single_move(move, position)
+    world = %{x: 5, y: 5}
+    actual_output = Marsrover.single_move(world, move, position)
     
     assert actual_output == expected_output
   end do
@@ -117,6 +118,20 @@ defmodule MarsroverTest do
       {%{x: 2, y: 2, direction: :W}, %{x: 1, y: 2, direction: :W}, :M},
       {%{x: 2, y: 2, direction: :S}, %{x: 2, y: 1, direction: :S}, :M},
       {%{x: 2, y: 2, direction: :E}, %{x: 3, y: 2, direction: :E}, :M}
+    ]
+  end
+
+  test_with_params "wrapping on single move", fn position, expected_output, move ->
+    world = %{x: 5, y: 5}
+    actual_output = Marsrover.single_move(world, move, position)
+
+    assert actual_output == expected_output
+  end do
+    [
+      {%{x: 1, y: 5, direction: :N}, %{x: 1, y: 1, direction: :N}, :M},
+      {%{x: 1, y: 1, direction: :S}, %{x: 1, y: 5, direction: :S}, :M},
+      {%{x: 5, y: 1, direction: :E}, %{x: 1, y: 1, direction: :E}, :M},
+      {%{x: 1, y: 1, direction: :W}, %{x: 5, y: 1, direction: :W}, :M},
     ]
   end
 end
