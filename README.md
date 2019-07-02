@@ -1,7 +1,6 @@
 # katas
-katas in different languages
+katas in different languages. They don't necessarily represent a good approach neither to TDD in general, nor to the language specifically.
 
-You should download the code using the go lang convention for source files. That is it, clone into {gopath}/src/github.com/{username}/
 
 The following languages and katas are present
 
@@ -11,7 +10,8 @@ The following languages and katas are present
   * Tennis
   * Yahtzee
   * Bowling
-  
+  * Bank Kata
+
 * Go
   * FizzBuzz
   * Roman Numerals
